@@ -1,0 +1,23 @@
+# Notas de configuración — Conecta tu Agente (Telegram + Composio)
+
+- Creé el bot con BotFather y lo conecté a OpenClaw usando `dmPolicy: pairing`, 
+  que requiere aprobar manualmente el emparejamiento con un código generado al 
+  primer mensaje del bot.
+
+- Para el MCP de Composio, el mayor obstáculo fue la autenticación: la API key 
+  (formato `ck_...`) es correcta, pero debe enviarse en el header 
+  `x-consumer-api-key`, no `x-api-key` como sugiere parte de la documentación 
+  general de Composio (esa es para su API REST completa, no para el endpoint 
+  MCP genérico `https://connect.composio.dev/mcp`).
+
+- También fue necesario que el cliente MCP aceptara `text/event-stream` además 
+  de `application/json` en el transporte `streamable-http`.
+
+- Inicialmente conecté Google Docs y Google Calendar con mi cuenta personal por 
+  error. Los desconecté y reconecté con una cuenta de prueba separada 
+  (`tatiana.testbot4geeks@gmail.com`) antes de ejecutar el flujo completo, 
+  siguiendo la advertencia del ejercicio.
+
+- El flujo de punta a punta (Telegram → crear documento en Docs → crear evento 
+  en Calendar → confirmación por Telegram) funcionó correctamente en el primer 
+  intento una vez resuelta la autenticación del MCP.
